@@ -9,20 +9,17 @@ import axios from 'axios'
 import './App.css'
 
 function App() {
-  // Removed unused count state
-  const [ code, setCode ] = useState(`function sum() {
+  const [code, setCode] = useState(`function sum() {
   return 1 + 1
 }`)
-
-  const [ review, setReview ] = useState(``)
+  const [review, setReview] = useState(``)
 
   useEffect(() => {
     prism.highlightAll()
   }, [])
 
   async function reviewCode() {
-    // Change localhost to relative path for Vercel deployment
-    const response = await axios.post('/ai/get-response', { code })
+    const response = await axios.post('/api/ai/get-response', { code })
     setReview(response.data.response)
   }
 
@@ -46,14 +43,10 @@ function App() {
               }}
             />
           </div>
-          <div
-            onClick={reviewCode}
-            className="review">Review</div>
+          <div onClick={reviewCode} className="review">Review</div>
         </div>
         <div className="right">
-          <Markdown
-            rehypePlugins={[ rehypeHighlight ]}
-          >
+          <Markdown rehypePlugins={[rehypeHighlight]}>
             {review}
           </Markdown>
         </div>
