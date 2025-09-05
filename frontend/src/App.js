@@ -22,7 +22,8 @@ function App() {
   async function reviewCode() {
     try {
       // Calls Vercel serverless backend automatically
-      const response = await axios.post('/ai/get-response', { code });
+      const response = await axios.post('/api/get-response', { code })
+
       setReview(response.data.response);
     } catch (error) {
       console.error("Error calling AI API:", error);
