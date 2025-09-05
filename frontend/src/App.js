@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react'
 import "prismjs/themes/prism-tomorrow.css"
 import Editor from "react-simple-code-editor"
@@ -10,8 +9,8 @@ import axios from 'axios'
 import './App.css'
 
 function App() {
-  const [ count, setCount ] = useState(0)
-  const [ code, setCode ] = useState(` function sum() {
+  // Removed unused count state
+  const [ code, setCode ] = useState(`function sum() {
   return 1 + 1
 }`)
 
@@ -22,7 +21,8 @@ function App() {
   }, [])
 
   async function reviewCode() {
-    const response = await axios.post('http://localhost:3002/ai/get-response', { code })
+    // Change localhost to relative path for Vercel deployment
+    const response = await axios.post('/ai/get-response', { code })
     setReview(response.data.response)
   }
 
@@ -52,16 +52,14 @@ function App() {
         </div>
         <div className="right">
           <Markdown
-
             rehypePlugins={[ rehypeHighlight ]}
-
-          >{review}</Markdown>
+          >
+            {review}
+          </Markdown>
         </div>
       </main>
     </>
   )
 }
-
-
 
 export default App
