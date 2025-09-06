@@ -1,13 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const { getResponse } = require("../controllers/ai.controller");
 
-router.post("/get-response", async (req, res) => {
-  const { code } = req.body;
-
-  // Example response from Gemini API
-  const responseFromAPI = `Reviewed code: ${code}`;
-
-  res.json({ response: responseFromAPI });
-});
+router.post("/get-response", getResponse); // ✅ Change GET → POST
 
 module.exports = router;
