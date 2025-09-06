@@ -9,7 +9,12 @@ app.use(cors()); // ✅ Allow all origins for now
 // ✅ Middleware to parse JSON
 app.use(express.json());
 
-app.use('/ai', aiRoutes); // ✅ Use the router
+app.use('/ai', aiRoutes);
+ // ✅ Use the router
+ app.get("/", (req, res) => {
+  res.send("✅ Backend is running!");
+});
+
 
 app.listen(PORT, () => {
   console.log("server started");
